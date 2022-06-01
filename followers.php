@@ -1,14 +1,17 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>ReSoC - Mes abonnés </title> 
+        <title>ReSoC - Mes abonnés </title>
         <meta name="author" content="Julien Falconnet">
         <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
     <?php include 'header.php'; ?>
-        <div id="wrapper">          
+        <div id="wrapper">
             <aside>
                 <img src = "user.jpg" alt = "Portrait de l'utilisatrice"/>
                 <section>
@@ -35,7 +38,7 @@
                     ";
                 $lesInformations = $mysqli->query($laQuestionEnSql);
                 // Etape 4: à vous de jouer
-                //@todo: faire la boucle while de parcours des abonnés et mettre les bonnes valeurs ci dessous 
+                //@todo: faire la boucle while de parcours des abonnés et mettre les bonnes valeurs ci dessous
                 while ($followers = $lesInformations->fetch_assoc())
                 {
                    //echo "<pre>" . print_r($followers, 1) . "</pre>";

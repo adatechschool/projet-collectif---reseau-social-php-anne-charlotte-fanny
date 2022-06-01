@@ -1,18 +1,21 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>ReSoC - Les message par mot-clé</title> 
+        <title>ReSoC - Les message par mot-clé</title>
         <meta name="author" content="Julien Falconnet">
         <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
     <?php include 'header.php'; ?>
-    
+
         <div id="wrapper">
             <?php
             /**
-             * Cette page est similaire à wall.php ou feed.php 
+             * Cette page est similaire à wall.php ou feed.php
              * mais elle porte sur les mots-clés (tags)
              */
             /**
@@ -57,18 +60,18 @@
                     SELECT posts.content,
                     posts.created,
                     users.id  as author_id,
-                    users.alias as author_name,  
-                    count(likes.id) as like_number,  
-                    GROUP_CONCAT(DISTINCT tags.label) AS taglist 
-                    FROM posts_tags as filter 
+                    users.alias as author_name,
+                    count(likes.id) as like_number,
+                    GROUP_CONCAT(DISTINCT tags.label) AS taglist
+                    FROM posts_tags as filter
                     JOIN posts ON posts.id=filter.post_id
                     JOIN users ON users.id=posts.user_id
-                    LEFT JOIN posts_tags ON posts.id = posts_tags.post_id  
-                    LEFT JOIN tags       ON posts_tags.tag_id  = tags.id 
-                    LEFT JOIN likes      ON likes.post_id  = posts.id 
-                    WHERE filter.tag_id = '$tagId' 
+                    LEFT JOIN posts_tags ON posts.id = posts_tags.post_id
+                    LEFT JOIN tags       ON posts_tags.tag_id  = tags.id
+                    LEFT JOIN likes      ON likes.post_id  = posts.id
+                    WHERE filter.tag_id = '$tagId'
                     GROUP BY posts.id
-                    ORDER BY posts.created DESC  
+                    ORDER BY posts.created DESC
                     ";
                 $lesInformations = $mysqli->query($laQuestionEnSql);
                 if ( ! $lesInformations)
@@ -83,7 +86,7 @@
                 {
 
                     //echo "<pre>" . print_r($post, 1) . "</pre>";
-                    ?>                
+                    ?>
                     <article>
                         <h3>
                         <time datetime='<?php echo $post['created'] ?>' >
@@ -95,13 +98,13 @@
                         <address><a href="wall.php?user_id=<?php echo $post['author_id'] ?>"><?php echo "par ".$post['author_name'] ?></a></address>
                         <div>
                             <p><?php echo $post['content'] ?></p>
-                        </div>                                            
+                        </div>
                         <footer>
                             <small>♥ <?php echo $post['like_number'] ?></small>
-                            <?php 
+                            <?php
                             $array = explode(',', $post['taglist']);
                             foreach ($array as $valeur) {
-                                echo "<a href=''>#$valeur, </a>";} 
+                                echo "<a href=''>#$valeur, </a>";}
                             ?>
                         </footer>
                     </article>

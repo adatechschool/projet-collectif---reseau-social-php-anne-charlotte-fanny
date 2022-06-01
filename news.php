@@ -1,14 +1,17 @@
+<?php
+session_start();
+?>
 <!doctype html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>ReSoC - Actualités</title> 
+        <title>ReSoC - Actualités</title>
         <meta name="author" content="Julien Falconnet">
         <link rel="stylesheet" href="style.css"/>
     </head>
     <body>
     <?php include 'header.php'; ?>
-        
+
         <div id="wrapper">
             <aside>
                 <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
@@ -19,7 +22,7 @@
                 </section>
             </aside>
             <main>
-                <!-- L'article qui suit est un exemple pour la présentation et 
+                <!-- L'article qui suit est un exemple pour la présentation et
                   @todo: doit etre retiré -->
                 <article>
                     <h3>
@@ -29,16 +32,16 @@
                     <div>
                         <p>Ceci est un paragraphe</p>
                         <p>Ceci est un autre paragraphe</p>
-                        <p>... de toutes manières il faut supprimer cet 
-                            article et le remplacer par des informations en 
+                        <p>... de toutes manières il faut supprimer cet
+                            article et le remplacer par des informations en
                             provenance de la base de donnée (voir ci-dessous)</p>
-                    </div>                                            
+                    </div>
                     <footer>
                         <small>♥1012 </small>
                         <a href="">#lorem</a>,
                         <a href="">#piscitur</a>,
                     </footer>
-                </article>               
+                </article>
 
                 <?php
                 /*
@@ -63,22 +66,22 @@
                 }
 
                 // Etape 2: Poser une question à la base de donnée et récupérer ses informations
-                // cette requete vous est donnée, elle est complexe mais correcte, 
+                // cette requete vous est donnée, elle est complexe mais correcte,
                 // si vous ne la comprenez pas c'est normal, passez, on y reviendra
                 $laQuestionEnSql = "
                     SELECT posts.content,
                     posts.created,
                     users.id  as author_id,
-                    users.alias as author_name,  
-                    count(likes.id) as like_number,  
-                    GROUP_CONCAT(DISTINCT tags.label) AS taglist 
+                    users.alias as author_name,
+                    count(likes.id) as like_number,
+                    GROUP_CONCAT(DISTINCT tags.label) AS taglist
                     FROM posts
                     JOIN users ON  users.id=posts.user_id
-                    LEFT JOIN posts_tags ON posts.id = posts_tags.post_id  
-                    LEFT JOIN tags       ON posts_tags.tag_id  = tags.id 
-                    LEFT JOIN likes      ON likes.post_id  = posts.id 
+                    LEFT JOIN posts_tags ON posts.id = posts_tags.post_id
+                    LEFT JOIN tags       ON posts_tags.tag_id  = tags.id
+                    LEFT JOIN likes      ON likes.post_id  = posts.id
                     GROUP BY posts.id
-                    ORDER BY posts.created DESC  
+                    ORDER BY posts.created DESC
                     LIMIT 5
                     ";
                 $lesInformations = $mysqli->query($laQuestionEnSql);
@@ -95,14 +98,14 @@
                 // NB: à chaque tour du while, la variable post ci dessous reçois les informations du post suivant.
                 while ($post = $lesInformations->fetch_assoc())
                 {
-                    //la ligne ci-dessous doit etre supprimée mais regardez ce 
-                    //qu'elle affiche avant pour comprendre comment sont organisées les information dans votre 
+                    //la ligne ci-dessous doit etre supprimée mais regardez ce
+                    //qu'elle affiche avant pour comprendre comment sont organisées les information dans votre
                     // echo "<pre>" . print_r($post,1) . "</pre>";
 
                     // @todo : Votre mission c'est de remplacer les AREMPLACER par les bonnes valeurs
-                    // ci-dessous par les bonnes valeurs cachées dans la variable $post 
+                    // ci-dessous par les bonnes valeurs cachées dans la variable $post
                     // on vous met le pied à l'étrier avec created
-                    // 
+                    //
                     // avec le ? > ci-dessous on sort du mode php et on écrit du html comme on veut... mais en restant dans la boucle
                     ?>
                     <article>
@@ -115,15 +118,15 @@
                         </div>
                         <footer>
                             <small><?php echo "♥ ". $post['like_number'] ?></small>
-                            <?php 
+                            <?php
                             $array = explode(',', $post['taglist']);
                             foreach ($array as $valeur) {
-                                echo "<a href=''>#$valeur, </a>";} 
+                                echo "<a href=''>#$valeur, </a>";}
                             ?>
                         </footer>
                     </article>
                     <?php
-                    // avec le <?php ci-dessus on retourne en mode php 
+                    // avec le <?php ci-dessus on retourne en mode php
                 }// cette accolade ferme et termine la boucle while ouverte avant.
                 ?>
 
