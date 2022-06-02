@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <?php $userId = intval($_SESSION['connected_id']); ?>
 
         <header>

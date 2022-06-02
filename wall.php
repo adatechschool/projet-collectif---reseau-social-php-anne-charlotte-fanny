@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -83,7 +80,7 @@ session_start();
                   <form action="wall.php" method="post">
                         <input type='hidden' name='auteur' value='<?php echo $userId?>'>
                         <dl>
-                            <dt><label for='auteur'> Auteur: <?php echo $author['author_name'];?> </label></dt>
+                            <dt><label for='auteur'> Auteur: <?php echo $_SESSION['connected_alias'];?> </label></dt>
                             <dt><label for='message'>Message</label></dt>
                             <dd><textarea name='message'></textarea></dd>
                         </dl>
