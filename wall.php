@@ -44,6 +44,14 @@
                     <p>Sur cette page vous trouverez tous les message de <a href="wall.php?user_id=<?php echo intval($_GET['user_id']) ?>">l'utilisatrice <?php echo $user['alias']?>
                         (n° <?php echo $userId ?>)</a>
                     </p>
+                <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
+                <button class="abonnement"
+                type="button">
+                S'abonner
+                </button>
+                </form>
+
+                   
                 </section>
             </aside>
             <main>
@@ -74,15 +82,88 @@
                  * Etape 4: @todo Parcourir les messsages et remplir correctement le HTML avec les bonnes valeurs php
                  */
                 ?>
-                <!-- A changer -->
-                <?php $author = $lesInformations->fetch_assoc();?>
+                <?php 
+                //Requête de la liste des tags pour le formulaire 
+                 $listTags = [];
+                 $laQuestionEnSqlTag = "SELECT * FROM tags";
+                 $lesInformationsTags = $mysqli->query($laQuestionEnSqlTag);
+                 while ($tag = $lesInformationsTags->fetch_assoc())
+                 {
+                     $listTags[$tag['id']] = $tag['label'];
+                 }
+                /**
+                  * TRAITEMENT DU FORMULAIRE pour créer un message
+                  */
+                  // On vérifie si un message est envoyé
+                 $enCoursDeTraitement = isset($_POST['message']);
+                 if ($enCoursDeTraitement)
+                 {
+                     // Si message envoyé on récupère les données du formulaire
+                     echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                     $new_authorid = $_POST['auteur'];
+                     $new_message = $_POST['message'];
+                     $new_tag = $_POST['tag'];
+                  
+                     //Ouvrir une connexion avec la base de donnée.
+                     include 'connexion_bdd.php';
+                     //Sécurité
+                     // pour éviter les injection sql : https://www.w3schools.com/sql/sql_injection.asp
+                     $new_authorid = $mysqli->real_escape_string($new_authorid);
+                     $new_message = $mysqli->real_escape_string($new_message);
+                     $new_tag = $mysqli->real_escape_string($new_tag);
+                    
+                     //Construction de la requete
+                     $lInstructionSql = "INSERT INTO posts (id, user_id, content, created, parent_id) "
+                
+                             . "VALUES (NULL, "
+                             . "'" . $new_authorid . "', "
+                             . "'" . $new_message . "', "
+                             . "NOW(), "
+                             . "NULL);"
+                             ;
+ 
+                     // Exécution de la requete
+                     $ok = $mysqli->query($lInstructionSql);
+                     if ( ! $ok)
+                     {
+                         echo "Le message n'a pas été enregistré : " . $mysqli->error;
+                     } else
+                     { 
+                         echo "Message enregistré ";
+                         $post_id = $mysqli->insert_id;
+                         echo $post_id ;
+                         $lInstructionSqlTag = "INSERT INTO posts_tags (id, post_id , tag_id) "
+                
+                             . "VALUES (NULL, "
+                             . "'" . $post_id . "', "
+                             . "'" . $new_tag . "'); "
+                             ;
+                        $okTag = $mysqli->query($lInstructionSqlTag);
+                       
+                        if ( ! $okTag)
+                        {
+                            echo "Le tag n'a pas été enregistré : " . $mysqli->error;
+                        } else
+                        { 
+                            echo "Tag enregistré ";
+                        }
+                     }
+                 }
+                
+                ?>
                 <article>
-                  <form action="wall.php" method="post">
+                  <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
                         <input type='hidden' name='auteur' value='<?php echo $userId?>'>
                         <dl>
                             <dt><label for='auteur'> Auteur: <?php echo $_SESSION['connected_alias'];?> </label></dt>
                             <dt><label for='message'>Message</label></dt>
                             <dd><textarea name='message'></textarea></dd>
+                            <dd><select name='tag'>
+                                  <?php 
+                                   foreach ($listTags as $id => $label)
+                                        echo "<option value='$id'>$label</option>";
+                                    ?>
+                            </select></dd> 
                         </dl>
                         <input type='submit'>
                   </form>
