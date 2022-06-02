@@ -92,7 +92,7 @@ session_start();
                         <time datetime='<?php echo $post['created'] ?>' >
                             <?php
                             setlocale(LC_TIME, "fr_FR","French");
-                             echo strftime("%d %B %G à %Hh%M", strtotime($post['created']));?>
+                            echo strftime("%d %B %G à %Hh%M", strtotime($post['created']));?>
                     </time>
                         </h3>
                         <address><a href="wall.php?user_id=<?php echo $post['author_id'] ?>"><?php echo "par ".$post['author_name'] ?></a></address>

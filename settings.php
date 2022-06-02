@@ -1,6 +1,8 @@
+
 <!doctype html>
 <html lang="fr">
-    <head>
+
+<head>
         <meta charset="utf-8">
         <title>ReSoC - Paramètres</title>
         <meta name="author" content="Julien Falconnet">
@@ -8,6 +10,15 @@
     </head>
     <body>
     <?php include 'header.php'; ?>
+    <?php
+    // Vérification de l'autorisation
+    if (!$_SESSION['connected_id']) {
+        // Si l'utilisateur n'est pas autorisé il est reconduit
+        // sur le formulaire d'identification
+        header("Location: login.php");
+        die();
+    }
+    ?>
 
         <div id="wrapper" class='profile'>
 

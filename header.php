@@ -1,7 +1,10 @@
 <?php
-session_start();
+echo session_status();
+if (session_status() == 2) {
+  session_start();
+  $userId = intval($_SESSION['connected_id']);
+}
 ?>
-<?php $userId = intval($_SESSION['connected_id']); ?>
 
         <header>
             <img src="resoc.jpg" alt="Logo de notre réseau social"/>
@@ -12,15 +15,22 @@ session_start();
                 <a href="tags.php?tag_id=<?php echo $userId; ?> ">Mots-clés</a>
                 <a href="registration.php">Inscription</a>
                 <a href="usurpedpost.php">Message en mode non-identifié</a>
-                <a href="login.php">Login</a>
+                <a href="destroy.php">Déconnexion</a>
             </nav>
             <nav id="user">
-                <a href="#">Profil </a>
+                <!-- Si tu es connecté.e on affiche onglet "Profil" sinon l'onglet "Login" -->
+                <?php
+                if (session_status() == 1) {
+                 echo "<a href='login.php'>Login</a>";}
+                else {
+                echo
+                "<a href='#'>Profil </a>
                 <ul>
-                    <li><a href="settings.php?user_id=<?php echo $userId; ?> ">Paramètres</a></li>
-                    <li><a href="followers.php?user_id=<?php echo $userId; ?> ">Mes suiveurs</a></li>
-                    <li><a href="subscriptions.php?user_id=<?php echo $userId; ?> ">Mes abonnements</a></li>
-                </ul>
-
+                    <li><a href='settings.php?user_id=". $userId ."'>Paramètres</a></li>
+                    <li><a href='followers.php?user_id=". $userId ."''>Mes suiveurs</a></li>
+                    <li><a href='subscriptions.php?user_id=". $userId ."'>Mes abonnements</a></li>
+                </ul>"
+                ;}
+              ?>
             </nav>
         </header>
