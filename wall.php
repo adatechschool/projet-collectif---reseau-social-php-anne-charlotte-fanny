@@ -264,6 +264,7 @@
                         } else
                         {
                             echo "👍";
+                            header('refresh:0');
                         }
                     }
                     if (isset($_SESSION['connected_id']))
