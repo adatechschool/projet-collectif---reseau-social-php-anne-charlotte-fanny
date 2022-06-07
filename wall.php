@@ -20,7 +20,7 @@
              * Documentation : https://www.php.net/manual/fr/reserved.variables.get.php
              * ... mais en résumé c'est une manière de passer des informations à la page en ajoutant des choses dans l'url
              */
-            $userId =intval($_GET['user_id']);
+            $userId =intval($_GET['user_id']); // A MODIFIER POUR METTRE L'ID DE LA SESSION
             ?>
             <?php
             /**
@@ -189,7 +189,7 @@
                  if (isset($_SESSION['connected_id']))
                  {
                 ?>
-    
+
                 <article>
                   <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
                         <input type='hidden' name='auteur' value='<?php echo $userId?>'>
@@ -208,16 +208,14 @@
                   </form>
                 </article>
                 <?php
-                 }
-                 ?>
+                }
+                ?>
                 <?php
                 // Pour afficher les différents posts
                 while ($post = $lesInformations->fetch_assoc())
                 {
-
                     //echo "<pre>" . print_r($post, 1) . "</pre>";
                     ?>
-
                     <article>
                         <h3>
                             <time datetime='<?php echo $post['created'] ?>' >
@@ -231,11 +229,15 @@
                             <p><?php echo $post['content'] ?></p>
                         </div>
                         <footer>
-                            <small>♥<?php echo $post['like_number'] ?> </small>
                             <!-- Ajout boutton like +1 -->
                             <!-- Requête pour ajout dans la BDD -->
                             <?php
-                            $enCoursDeTraitement = isset($_POST['liker_id']);
+                            // Pour que le like ne se passe qu'une fois on vérifie que :
+                            // Probléme => Lorsqu'on like, comme le bouton est dans la boucle while, le like se répète autant de fois qu'il y a de posts.
+                            //Pour palier à ça on rajoute une condition supplémentaire pour l'éxécution du like.
+                            $enCoursDeTraitement = isset($_POST['liker_id']) // 1ère condition : On like le post
+                                                  && $_POST['post_id'] == $post['id'];
+                                                  // 2ème condition : Lorsque la boucle passe à l'ID du post liké, on rajoute le like mais pas sur les autres passage de boucle.
                     if ($enCoursDeTraitement)
                     {
                         // on ne fait ce qui suit que si un formulaire a été soumis.
@@ -263,10 +265,15 @@
                             echo "⚠️" . $mysqli->error;
                         } else
                         {
+                            //header('refresh:0'); NE FONCTIONNE PAS A PARTIR DU DEUXIEME NE PEUT ETRE UTILISE : BONNE PRATIQUE
+                            // FAIRE TOUS LE PHP AYANT BESOIN DU HEADER AVANT LA PARTIE AFFICHAGE
+                            $post['like_number'] += 1;
                             echo "👍";
-                            header('refresh:0');
                         }
                     }
+                            ?>
+                          <small>♥<?php echo $post['like_number'] ?> </small>
+                    <?php
                     if (isset($_SESSION['connected_id']))
                  {
                     ?>
@@ -278,7 +285,7 @@
                                 <input type="submit" value="💖">
                               </form>
                             </small>
-                        <?php } ?>    
+                        <?php } ?>
 
                             <a href="">
                             <?php
