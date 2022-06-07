@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -71,6 +72,7 @@
                     users.id  as author_id,
                     users.alias as author_name,
                     count(likes.id) as like_number,
+                    tags.id as tagId,
                     GROUP_CONCAT(DISTINCT tags.label) AS taglist
                     FROM posts
                     JOIN users ON  users.id=posts.user_id
@@ -79,7 +81,7 @@
                     LEFT JOIN likes      ON likes.post_id  = posts.id
                     GROUP BY posts.id
                     ORDER BY posts.created DESC
-                    LIMIT 5
+                    LIMIT 50
                     ";
                 $lesInformations = $mysqli->query($laQuestionEnSql);
                 // Vérification
@@ -118,7 +120,7 @@
                             <?php
                             $array = explode(',', $post['taglist']);
                             foreach ($array as $valeur) {
-                                echo "<a href=''>#$valeur, </a>";}
+                                echo "<a href='tags.php?tag_id=". $post['tagId']."'> #$valeur, </a>";}
                             ?>
                         </footer>
                     </article>

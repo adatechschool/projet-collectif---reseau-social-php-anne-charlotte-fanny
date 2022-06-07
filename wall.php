@@ -1,3 +1,5 @@
+<?php session_start();
+ ?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -25,6 +27,7 @@
              * Etape 2: se connecter à la base de donnée
              */
             include 'connexion_bdd.php';
+
             ?>
 
             <aside>
@@ -41,7 +44,7 @@
                 <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
                 <section>
                     <h3>Présentation</h3>
-                    <p>Sur cette page vous trouverez tous les message de <a href="wall.php?user_id=<?php echo intval($_GET['user_id']) ?>">l'utilisatrice <?php echo $user['alias']?>
+                    <p>Sur cette page vous trouverez tous les messages de <a href="wall.php?user_id=<?php echo intval($_GET['user_id']) ?>">l'utilisatrice <?php echo $user['alias']?>
                         (n° <?php echo $userId ?>)</a>
                     </p>
                 <?php
@@ -95,7 +98,7 @@
                  */
                 $laQuestionEnSql = "
                     SELECT posts.content, posts.created, posts.id, users.alias as author_name, users.id as author_id,
-                    COUNT(likes.id) as like_number, GROUP_CONCAT(DISTINCT tags.label) AS taglist
+                    COUNT(likes.id) as like_number, tags.id as tagId, GROUP_CONCAT(DISTINCT tags.label) AS taglist
                     FROM posts
                     JOIN users ON  users.id=posts.user_id
                     LEFT JOIN posts_tags ON posts.id = posts_tags.post_id
@@ -132,7 +135,7 @@
                 if ($enCoursDeTraitement)
                 {
                      // Si message envoyé on récupère les données du formulaire
-                    echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                    //echo "<pre>" . print_r($_POST, 1) . "</pre>";
                     $new_authorid = $_POST['auteur'];
                     $new_message = $_POST['message'];
                     $new_tag = $_POST['tag'];
@@ -179,11 +182,14 @@
                         } else
                         {
                             echo "Tag enregistré ";
+                            header('refresh:0');
                         }
                      }
                  }
-
+                 if (isset($_SESSION['connected_id']))
+                 {
                 ?>
+    
                 <article>
                   <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
                         <input type='hidden' name='auteur' value='<?php echo $userId?>'>
@@ -201,8 +207,11 @@
                         <input type='submit'>
                   </form>
                 </article>
-
                 <?php
+                 }
+                 ?>
+                <?php
+                // Pour afficher les différents posts
                 while ($post = $lesInformations->fetch_assoc())
                 {
 
@@ -242,8 +251,7 @@
                         // pour éviter les injection sql : https://www.w3schools.com/sql/sql_injection.asp
                         $new_likerId  = intval($mysqli->real_escape_string($new_likerId));
                         $new_postId  = intval($mysqli->real_escape_string($new_postId));                        //Etape 4 : construction de la requete
-                        $lInstructionSql = "INSERT INTO likes "
-                                . "(id, user_id, post_id) "
+                        $lInstructionSql = "INSERT INTO likes (id, user_id, post_id) "
                                 . "VALUES (NULL, "
                                 . $new_likerId . ", "
                                 . $new_postId . "); "
@@ -258,22 +266,24 @@
                             echo "👍";
                         }
                     }
+                    if (isset($_SESSION['connected_id']))
+                 {
                     ?>
                             <!-- Formulaire "bouton ♥" Front -->
                             <small>
-                              <form action=""wall.php?user_id=<?php echo $userId; ?>" method="post">
+                              <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
                                 <input type="hidden" name="liker_id" value="<?php echo $_SESSION['connected_id']?>">
                                 <input type="hidden" name="post_id" value= "<?php echo $post['id'] ?>">
                                 <input type="submit" value="💖">
                               </form>
                             </small>
-
+                        <?php } ?>    
 
                             <a href="">
                             <?php
                             $array = explode(',', $post['taglist']);
                             foreach ($array as $valeur) {
-                                echo "<a href=''>#$valeur, </a>";}
+                                echo "<a href='tags.php?tag_id=". $post['tagId']."'>#$valeur, </a>";}
                             ?></a>
                         </footer>
                     </article>

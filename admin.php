@@ -1,3 +1,4 @@
+<?php include 'session.php'; ?>
 <!doctype html>
 <html lang="fr">
     <head>

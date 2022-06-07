@@ -1,6 +1,5 @@
-<?php
-session_start();
-?>
+<?php session_start(); ?>
+<?php include 'session.php'; ?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -50,7 +49,7 @@ session_start();
                         // on ne fait ce qui suit que si un formulaire a été soumis.
                         // Etape 2: récupérer ce qu'il y a dans le formulaire @todo: c'est là que votre travaille se situe
                         // observez le résultat de cette ligne de débug (vous l'effacerez ensuite)
-                        echo "<pre>" . print_r($_POST, 1) . "</pre>";
+                        //echo "<pre>" . print_r($_POST, 1) . "</pre>";
                         // et complétez le code ci dessous en remplaçant les ???
                         $authorId = $_POST['auteur'];
                         $postContent = $_POST['message'];
@@ -69,7 +68,7 @@ session_start();
                                 . "NOW(), "
                                 . "NULL);"
                                 ;
-                        echo $lInstructionSql;
+                        //echo $lInstructionSql;
                         // Etape 5 : execution
                         $ok = $mysqli->query($lInstructionSql);
                         if ( ! $ok)
