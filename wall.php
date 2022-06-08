@@ -20,7 +20,7 @@
              * Documentation : https://www.php.net/manual/fr/reserved.variables.get.php
              * ... mais en résumé c'est une manière de passer des informations à la page en ajoutant des choses dans l'url
              */
-            $userId =intval($_GET['user_id']); // A MODIFIER POUR METTRE L'ID DE LA SESSION
+            $userId = intval($_GET['user_id']); // A MODIFIER POUR METTRE L'ID DE LA SESSION
             ?>
             <?php
             /**
@@ -58,8 +58,6 @@
                         // et complétez le code ci dessous en remplaçant les ???
                         $new_followingId = $_POST['following_id'];
                         $new_followedId = $_POST['followed_id'];
-
-
                         //Etape 3 : Petite sécurité
                         // pour éviter les injection sql : https://www.w3schools.com/sql/sql_injection.asp
                         $new_followingId  = intval($mysqli->real_escape_string($new_followingId));
@@ -81,12 +79,14 @@
                         }
                     }
                     ?>
+                  <?php if ($userId != $_SESSION['connected_id']) { ?>
+
                 <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
                   <input type='hidden' name='following_id' value='<?php echo $_SESSION['connected_id']?>'>
                   <input type='hidden' name='followed_id' value='<?php echo  $userId?>'>
                   <input type="submit" value="S'abonner">
                 </form>
-
+                <?php }?>
 
                 </section>
             </aside>
@@ -191,8 +191,8 @@
                 ?>
 
                 <article>
-                  <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
-                        <input type='hidden' name='auteur' value='<?php echo $userId?>'>
+                  <form action="wall.php?user_id=<?php echo $_SESSION['connected_id']?>" method="post">
+                        <input type='hidden' name='auteur' value='<?php echo $_SESSION['connected_id']?>'>
                         <dl>
                             <dt><label for='auteur'> Auteur: <?php echo $_SESSION['connected_alias'];?> </label></dt>
                             <dt><label for='message'>Message</label></dt>

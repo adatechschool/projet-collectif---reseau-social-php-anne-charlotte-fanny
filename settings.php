@@ -1,5 +1,6 @@
+<?php include 'session.php';
+session_start(); ?>
 
-<?php include 'session.php'; ?>
 <!doctype html>
 <html lang="fr">
 
@@ -13,7 +14,7 @@
     <?php include 'header.php'; ?>
     <?php
     // Vérification de l'autorisation
-    if (!$_SESSION['connected_id']) {
+    if (!isset($_SESSION['connected_id'])) {
         // Si l'utilisateur n'est pas autorisé il est reconduit
         // sur le formulaire d'identification
         header("Location: login.php");

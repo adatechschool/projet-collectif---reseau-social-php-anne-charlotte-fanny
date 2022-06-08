@@ -68,6 +68,7 @@
                 // si vous ne la comprenez pas c'est normal, passez, on y reviendra
                 $laQuestionEnSql = "
                     SELECT posts.content,
+                    posts.id,
                     posts.created,
                     users.id  as author_id,
                     users.alias as author_name,
@@ -116,7 +117,47 @@
                             <p><?php echo $post['content'] ?></p>
                         </div>
                         <footer>
-                            <small><?php echo "♥ ". $post['like_number'] ?></small>
+                          <?php
+                            $enCoursDeTraitement = isset($_POST['liker_id']) // 1ère condition : On like le post
+                                                  && $_POST['post_id'] == $post['id'];
+                                                  // 2ème condition : Lorsque la boucle passe à l'ID du post liké, on rajoute le like mais pas sur les autres passage de boucle.
+                          if ($enCoursDeTraitement) {
+                            $new_likerId = $_POST['liker_id'];
+                            $new_postId = $_POST['post_id'];
+
+                            $new_likerId  = intval($mysqli->real_escape_string($new_likerId));
+                            $new_postId  = intval($mysqli->real_escape_string($new_postId));                        //Etape 4 : construction de la requete
+                            $lInstructionSql = "INSERT INTO likes (id, user_id, post_id) "
+                                . "VALUES (NULL, "
+                                . $new_likerId . ", "
+                                . $new_postId . "); "
+                                ;
+                        // Etape 5 : execution
+                        $ok = $mysqli->query($lInstructionSql);
+                        if ( ! $ok)
+                        {
+                            echo "⚠️" . $mysqli->error;
+                        } else
+                        {
+                            //header('refresh:0'); NE FONCTIONNE PAS A PARTIR DU DEUXIEME NE PEUT ETRE UTILISE : BONNE PRATIQUE
+                            // FAIRE TOUS LE PHP AYANT BESOIN DU HEADER AVANT LA PARTIE AFFICHAGE
+                            $post['like_number'] += 1;
+                            echo "👍";
+                        }
+                          } ?>
+                          <small>♥<?php echo $post['like_number'] ?> </small>
+                    <?php
+                    if (isset($_SESSION['connected_id'])) { ?>
+                            <!-- Formulaire "bouton ♥" Front -->
+                            <small>
+                              <form action="news.php" method="post">
+                                <input type="hidden" name="liker_id" value="<?php echo $_SESSION['connected_id']?>">
+                                <input type="hidden" name="post_id" value= "<?php echo $post['id'] ?>">
+                                <input type="submit" value="💖">
+                              </form>
+                            </small>
+                        <?php } ?>
+
                             <?php
                             $array = explode(',', $post['taglist']);
                             foreach ($array as $valeur) {
