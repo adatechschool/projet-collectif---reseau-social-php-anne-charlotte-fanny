@@ -48,7 +48,31 @@
                 //@todo: afficher le résultat de la ligne ci dessous, remplacer XXX par l'alias et effacer la ligne ci-dessous
                 //echo "<pre>" . print_r($user, 1) . "</pre>";
                 ?>
-                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+                <?php
+                switch ($userId) {
+                    case 11:
+                        echo " <img src='fanny.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 12:
+                        echo "<img src='anne.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 13:
+                        echo "<img src='virginie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 14:
+                        echo "<img src='julie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 17:
+                        echo "<img src='marine.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 18:
+                        echo "<img src='oihan.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 19:
+                        echo "<img src='unknown.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                }
+                ?>
                 <section>
                     <h3>Présentation</h3>
                     <p>Sur cette page vous trouverez tous les message des utilisatrices
@@ -109,7 +133,16 @@
                         <p><?php echo $post['content'] ?></p>
                     </div>
                     <footer>
-                        <small>♥ <?php echo $post['like_number'] ?></small>
+                    <small id="smallwall"><?php echo $post['like_number'] ?> </small>
+                    <small>
+                              <form action="feed.php?user_id=<?php echo $_SESSION['connected_id']?>" method="post">
+                                <input type="hidden" name="liker_id" value="<?php echo $_SESSION['connected_id']?>">
+                                <input type="hidden" name="post_id" value= "<?php echo $post['id'] ?>">
+                                <button style="border: none; background-color: white; text-decoration: none; display: inline-block; padding: 5px;" type="submit">
+                                <img src="love.png" alt="" style="float: left; padding-right: 0.5em; width:5%;" /></button>
+
+                              </form>
+                            </small>
                         <?php
                             $array = explode(',', $post['taglist']);
                             foreach ($array as $valeur) {

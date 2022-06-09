@@ -16,8 +16,7 @@
                 <img src="news.png" alt="Portrait de l'utilisatrice"/>
                 <section>
                     <h3>Bienvenue sur SocialSong</h3>
-                    <p id="presentation">Sur cette page vous trouverez les derniers messages de
-                        tous les utilisatrices du site.</p>
+                    <p id="presentation">Sur cette page vous trouverez les dernières trouvailles musicales des utilisateurs de SocialSong. </p>
                 </section>
             </aside>
             <main>
@@ -40,8 +39,17 @@
 
                     </div>
                     <footer>
-                        <img src="love.png"/>
-                        <small>1012 </small>
+                        
+                        <small id="exemple">1012 </small>
+                        <small>
+                              <form action="news.php" method="post">
+                                <input type="hidden" name="liker_id" value="<?php echo $_SESSION['connected_id']?>">
+                                <input type="hidden" name="post_id" value= "<?php echo $post['id'] ?>">
+                                <button style="border: none; background-color: white; text-decoration: none; display: inline-block; padding: 5px;" type="submit">
+                                <img src="love.png" alt="" style="float: left; padding-right: 0.5em; width:5%;" /></button>
+
+                              </form>
+                            </small>
                         <a href="">#culture</a>,
                     </footer>
                 </article>
@@ -150,8 +158,8 @@
                             echo "👍";
                         }
                           } ?>
-                          <img src="love.png"/>
-                          <small><?php echo $post['like_number'] ?> </small>
+                          
+                          <small id="numberlikes"><?php echo $post['like_number'] ?> </small>
                     <?php
                     if (isset($_SESSION['connected_id'])) { ?>
                             <!-- Formulaire "bouton ♥" Front -->
@@ -159,7 +167,9 @@
                               <form action="news.php" method="post">
                                 <input type="hidden" name="liker_id" value="<?php echo $_SESSION['connected_id']?>">
                                 <input type="hidden" name="post_id" value= "<?php echo $post['id'] ?>">
-                                <input type="submit" value="💖">
+                                <button style="border: none; background-color: white; text-decoration: none; display: inline-block; padding: 5px;" type="submit">
+                                <img src="love.png" alt="" style="float: left; padding-right: 0.5em; width:5%;" /></button>
+
                               </form>
                             </small>
                         <?php } ?>

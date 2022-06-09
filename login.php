@@ -11,11 +11,8 @@
 
         <div id="wrapper" >
 
-            <aside>
-                <h2>Présentation</h2>
-                <p>Bienvenu sur notre réseau social.</p>
-            </aside>
-            <main>
+            
+            <main id="connexion">
                 <article>
                     <h2>Connexion</h2>
                     <?php
@@ -72,14 +69,20 @@
                     ?>
                     <form action="login.php" method="post">
                         <input type='hidden'name='???' value='achanger'>
-                        <dl>
-                            <dt><label for='email'>E-Mail</label></dt>
-                            <dd><input type='email'name='email'></dd>
-                            <dt><label for='motpasse'>Mot de passe</label></dt>
-                            <dd><input type='password'name='motpasse'></dd>
-                        </dl>
-                        <input type='submit'>
+                    
+                            <label for='email'>E-Mail</label>
+                            <br>
+                            <input type='email'name='email'>
+                            <br>
+                            <br>
+                           <label for='motpasse'>Mot de passe</label>
+                           <br>
+                            <input type='password'name='motpasse'>
+                           <br>
+                           <br>
+                        <input type='submit' class="submitButton">
                     </form>
+                    <br>
                     <p>
                         Pas de compte?
                         <a href='registration.php'>Inscrivez-vous.</a>

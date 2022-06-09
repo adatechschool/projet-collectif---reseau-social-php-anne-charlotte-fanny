@@ -12,11 +12,12 @@
 
         <div id="wrapper" >
 
-            <aside>
-                <h2>Présentation</h2>
-                <p>Bienvenu sur notre réseau social.</p>
+            <aside id=#inscriptionaside >
+                <img src="inscription.png" alt="Portrait de l'utilisatrice"/>
+                <h2>SocialSong</h2>
+                <p>Inscris-toi!</p>
             </aside>
-            <main>
+            <main id="inscription">
                 <article>
                     <h2>Inscription</h2>
                     <?php
@@ -72,12 +73,14 @@
                         <dl>
                             <dt><label for='pseudo'>Pseudo</label></dt>
                             <dd><input type='text'name='pseudo'></dd>
+                            <br>
                             <dt><label for='email'>E-Mail</label></dt>
                             <dd><input type='email'name='email'></dd>
+                            <br>
                             <dt><label for='motpasse'>Mot de passe</label></dt>
                             <dd><input type='password'name='motpasse'></dd>
                         </dl>
-                        <input type='submit'>
+                        <input type='submit' class="submitButton">
                     </form>
                 </article>
             </main>

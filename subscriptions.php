@@ -23,8 +23,33 @@ session_start();
     <?php include 'header.php'; ?>
         <div id="wrapper">
             <aside>
-                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+            
                 <section>
+                <?php
+                switch ($_SESSION['connected_id']) {
+                    case 11:
+                        echo " <img src='fanny.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 12:
+                        echo "<img src='anne.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 13:
+                        echo "<img src='virginie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 14:
+                        echo "<img src='julie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 17:
+                        echo "<img src='marine.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 18:
+                        echo "<img src='oihan.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 19:
+                        echo "<img src='unknown.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                }
+                ?>
                     <h3>Présentation</h3>
                     <p>Sur cette page vous trouverez la liste des personnes dont
                     <a href="wall.php?user_id=<?php echo intval($_GET['user_id']) ?>">l'utilisatrice
@@ -56,7 +81,31 @@ session_start();
                     //echo "<pre>" . print_r($followers, 1) . "</pre>";
                ?>
                 <article>
-                    <img src="user.jpg" alt="blason"/>
+                <?php
+                switch ($following['id']) {
+                    case 11:
+                        echo " <img src='fanny.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 12:
+                        echo "<img src='anne.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 13:
+                        echo "<img src='virginie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 14:
+                        echo "<img src='julie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 17:
+                        echo "<img src='marine.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 18:
+                        echo "<img src='oihan.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 19:
+                        echo "<img src='unknown.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                }
+                ?>
                     <h3><a href="wall.php?user_id=<?php echo $following['id'] ?>"><?php echo $following['alias'] ?></a></h3>
                     <p>id:<?php echo $following['id'] ?></p>
                 </article>

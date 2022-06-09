@@ -193,3 +193,73 @@ pre{
 #citation {
     font-style: italic;
 }
+
+#connexion {overflow-y: hidden !important;}
+
+#connexion h2 {
+    color: #3E2EA6 !important;}
+#connexion article {
+    text-align:center !important;
+    height:800px !important;
+    padding-top:12em !important;
+}
+#connexion label {
+    font-weight: bold !important;
+}
+
+
+ input[type=submit] {
+    background-color:#D99F59;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+  
+  .submitButton:hover {
+background-color:#f0ca79;
+  }
+  
+  #wrapper aside h2 {
+      text-align:center !important;
+      color:#3E2EA6 !important;
+  }
+
+
+
+ #usurpedpost { overflow-y: hidden !important;}
+
+ #inscription {
+    overflow-y: hidden !important;
+ }
+
+ #inscription h2 {
+     color: #3E2EA6 !important;
+ }
+
+ #inscription label {
+    font-weight: bold !important;
+}
+#numberlikes, #exemple, #smallwall {
+    padding-top:0.8em !important;
+}
+
+#abonnement {
+    background-color:#3E2EA6;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    text-align:center;
+    margin-left: 7em;
+  }
+  
+#abonnement:hover {
+background-color:#8C84BF;
+  }

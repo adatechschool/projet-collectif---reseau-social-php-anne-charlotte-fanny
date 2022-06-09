@@ -41,7 +41,31 @@
                 //@todo: afficher le résultat de la ligne ci dessous, remplacer XXX par l'alias et effacer la ligne ci-dessous
                 //echo "<pre>" . print_r($user, 1) . "</pre>";
                 ?>
-                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+                <?php
+                switch ($userId) {
+                    case 11:
+                        echo " <img src='fanny.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 12:
+                        echo "<img src='anne.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 13:
+                        echo "<img src='virginie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 14:
+                        echo "<img src='julie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 17:
+                        echo "<img src='marine.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 18:
+                        echo "<img src='oihan.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 19:
+                        echo "<img src='unknown.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                }
+                ?>
                 <section>
                     <h3>Présentation</h3>
                     <p>Sur cette page vous trouverez tous les messages de <a href="wall.php?user_id=<?php echo intval($_GET['user_id']) ?>">l'utilisatrice <?php echo $user['alias']?>
@@ -84,7 +108,7 @@
                 <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
                   <input type='hidden' name='following_id' value='<?php echo $_SESSION['connected_id']?>'>
                   <input type='hidden' name='followed_id' value='<?php echo  $userId?>'>
-                  <input type="submit" value="S'abonner">
+                  <input type="submit" value="S'abonner" id="abonnement">
                 </form>
                 <?php }?>
 
@@ -191,12 +215,14 @@
                 ?>
 
                 <article>
+                  <fieldset style="border-color: #3E2EA6;">
+                  <legend style="font-weight: bold; font-size: 1em; color: #3E2EA6; padding: 3px;"> Ecrivez votre message </legend>
                   <form action="wall.php?user_id=<?php echo $_SESSION['connected_id']?>" method="post">
                         <input type='hidden' name='auteur' value='<?php echo $_SESSION['connected_id']?>'>
                         <dl>
-                            <dt><label for='auteur'> Auteur: <?php echo $_SESSION['connected_alias'];?> </label></dt>
-                            <dt><label for='message'>Message</label></dt>
-                            <dd><textarea name='message'></textarea></dd>
+                            <dt style="padding-bottom: 10px;"><label  style="font-weight: bold; font-size: 1em; color: #3E2EA6;" for='auteur'> Auteur: <?php echo $_SESSION['connected_alias'];?> </label></dt>
+                            <dt style="padding-bottom: 10px;"><label  style="font-weight: bold; font-size: 1em; color: #3E2EA6;" for='message'>Message :</label></dt>
+                            <dd style="padding-bottom: 10px;"><textarea rows="5" cols="100" name='message'></textarea></dd>
                             <dd><select name='tag'>
                                   <?php
                                   foreach ($listTags as $id => $label)
@@ -204,8 +230,9 @@
                                     ?>
                             </select></dd>
                         </dl>
-                        <input type='submit'>
+                        <input class ="submitButton" type='submit'>
                   </form>
+                  </fieldset>
                 </article>
                 <?php
                 }
@@ -272,17 +299,19 @@
                         }
                     }
                             ?>
-                          <small>♥<?php echo $post['like_number'] ?> </small>
+                          <small id="smallwall"><?php echo $post['like_number'] ?> </small>
                     <?php
                     if (isset($_SESSION['connected_id']))
                  {
                     ?>
                             <!-- Formulaire "bouton ♥" Front -->
                             <small>
-                              <form action="wall.php?user_id=<?php echo $userId; ?>" method="post">
+                              <form action="wall.php?user_id=<?php echo $userId?>" method="post">
                                 <input type="hidden" name="liker_id" value="<?php echo $_SESSION['connected_id']?>">
                                 <input type="hidden" name="post_id" value= "<?php echo $post['id'] ?>">
-                                <input type="submit" value="💖">
+                                <button style="border: none; background-color: white; text-decoration: none; display: inline-block; padding: 5px;" type="submit">
+                                <img src="love.png" alt="" style="float: left; padding-right: 0.5em; width:5%;" /></button>
+
                               </form>
                             </small>
                         <?php } ?>

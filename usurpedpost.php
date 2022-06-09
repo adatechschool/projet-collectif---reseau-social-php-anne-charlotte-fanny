@@ -13,21 +13,18 @@
         <div id="wrapper" >
 
             <aside>
-                <h2>Présentation</h2>
-                <p>Sur cette page on peut poster un message en se faisant
-                    passer pour quelqu'un d'autre</p>
+                <img src="unknown.png" alt="Portrait de l'utilisatrice"/>
+                <h3>Formulaire anonyme</h2>
+                <p>Vous n'assumez pas votre chanson préférée, mais vous voulez la partager ? </p>
+                <p>Vous êtes au bon endroit ! 🎵 </p>
             </aside>
-            <main>
+            <main id="usurpedpost">
                 <article>
-                    <h2>Poster un message</h2>
+                    <h2 style="font-weight: bold; color: #3E2EA6;">Poster un message</h2>
                     <?php
-                    /**
-                     * BD
-                     */
+                    /* BD */
                     include 'connexion_bdd.php';
-                    /**
-                     * Récupération de la liste des auteurs
-                     */
+                    /* Récupération de la liste des auteurs */
                     $listAuteurs = [];
                     $laQuestionEnSql = "SELECT * FROM users";
                     $lesInformations = $mysqli->query($laQuestionEnSql);
@@ -37,9 +34,7 @@
                     }
 
 
-                    /**
-                     * TRAITEMENT DU FORMULAIRE
-                     */
+                    /* TRAITEMENT DU FORMULAIRE */
                     // Etape 1 : vérifier si on est en train d'afficher ou de traiter le formulaire
                     // si on recoit un champs email rempli il y a une chance que ce soit un traitement
                     $enCoursDeTraitement = isset($_POST['auteur']);
@@ -75,25 +70,21 @@
                             echo "Impossible d'ajouter le message: " . $mysqli->error;
                         } else
                         {
-                            echo "Message posté en tant que :" . $listAuteurs[$authorId];
+                          header("Location:news.php");
                         }
                     }
                     ?>
-                    <form action="usurpedpost.php" method="post">
-                        <input type='hidden' name='???' value='achanger'>
+                    <fieldset style="border-color: #3E2EA6;">
+                      <legend style="font-weight: bold; font-size: 1em; color: #3E2EA6; padding: 3px;"> Ecrivez de manière anonyme </legend>
+                      <form action="usurpedpost.php" method="post">
+                        <input type='hidden' name='auteur' value='19'>
                         <dl>
-                            <dt><label for='auteur'>Auteur</label></dt>
-                            <dd><select name='auteur'>
-                                    <?php
-                                    foreach ($listAuteurs as $id => $alias)
-                                        echo "<option value='$id'>$alias</option>";
-                                    ?>
-                                </select></dd>
-                            <dt><label for='message'>Message</label></dt>
-                            <dd><textarea name='message'></textarea></dd>
+                            <dt style="padding-bottom: 10px;"><label style="font-weight: bold; font-size: 1em; color: #3E2EA6;" for='message'> Message : </label></dt>
+                            <dd><textarea rows="5" cols="100" name='message'></textarea></dd>
                         </dl>
-                        <input type='submit'>
+                        <input class ="submitButton" type='submit'>
                     </form>
+                    </fieldset>
                 </article>
             </main>
         </div>

@@ -26,7 +26,31 @@ session_start(); ?>
 
 
             <aside>
-                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+            <?php
+                switch ($_SESSION['connected_id']) {
+                    case 11:
+                        echo " <img src='fanny.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 12:
+                        echo "<img src='anne.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 13:
+                        echo "<img src='virginie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 14:
+                        echo "<img src='julie.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 17:
+                        echo "<img src='marine.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 18:
+                        echo "<img src='oihan.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                    case 19:
+                        echo "<img src='unknown.png' alt='Portrait de l'utilisatrice'/>";
+                        break;
+                }
+                ?>
                 <section>
                     <h3>Présentation</h3>
                     <p>Sur cette page vous trouverez les informations de
