@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <title>ReSoC - Les message par mot-clé</title>
         <meta name="author" content="Julien Falconnet">
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
     </head>
     <body>
     <?php include 'header.php'; ?>

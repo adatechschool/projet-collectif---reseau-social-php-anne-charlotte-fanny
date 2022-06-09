@@ -6,29 +6,29 @@
 
                 
                 <nav id='menu'>
-                <a href='news.php'>Logo</a>
-                    <a href='news.php'>Actualités</a>
-                    <a href='feed.php'>Flux</a>
-                    <a href='registration.php'>Inscription</a>
-                    <a href='usurpedpost.php'>Message anonyme</a>
+                <a href='news.php'><img src='cassette-radio.png'/></a>
+                    <a href='news.php'>ACTUALITES</a>
+                    <a href='feed.php'>FLUX</a>
+                    <a href='registration.php'>INSCRIPTION</a>
+                    <a href='usurpedpost.php'>MESSAGE ANONYME</a>
                 </nav>
                 <nav id='user'>
-                 <a href='login.php'>Login</a>
+                 <a href='login.php'>LOGIN</a>
                  </nav>
                 </header>";
 
                 }
                 else {
                 echo "<header>
-                <img src='resoc.jpg' alt='Logo de notre réseau social'/>
                 <nav id='menu'>
-                    <a href='news.php'>Actualités</a>
-                    <a href='wall.php?user_id=". $_SESSION['connected_id']."'>Mur</a>
-                    <a href='feed.php?user_id=". $_SESSION['connected_id']."'>Flux</a>
-                    <a href='usurpedpost.php'>Message en mode non-identifié</a>
+                    <a href='news.php'><img src='cassette-radio.png'/></a>
+                    <a href='news.php'>ACTUALITES</a>
+                    <a href='wall.php?user_id=". $_SESSION['connected_id']."'>MUR</a>
+                    <a href='feed.php?user_id=". $_SESSION['connected_id']."'>FLUX</a>
+                    <a href='usurpedpost.php'>MESSAGE ANONYME</a>
                 </nav>
                 <nav id='user'>
-               <a href='#'>Profil </a>
+               <a href='#'>PROFIL </a>
                 <ul>
                     <li><a href='settings.php?user_id=".  $_SESSION['connected_id'] ."'>Paramètres</a></li>
                     <li><a href='followers.php?user_id=".  $_SESSION['connected_id'] ."''>Mes suiveurs</a></li>

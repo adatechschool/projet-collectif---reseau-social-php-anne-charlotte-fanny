@@ -1,12 +1,11 @@
 <?php session_start(); ?>
-<?php include 'session.php'; ?>
 <!doctype html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
         <title>ReSoC - Inscription</title>
         <meta name="author" content="Julien Falconnet">
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
     </head>
     <body>
     <?php include 'header.php'; ?>

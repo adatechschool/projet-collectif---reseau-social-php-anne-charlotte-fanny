@@ -15,7 +15,9 @@ session_start();
         <meta charset="utf-8">
         <title>ReSoC - Mes abonnements</title>
         <meta name="author" content="Julien Falconnet">
-        <link rel="stylesheet" href="style.css"/>
+        <style>
+        <?php include "style.css" ?>
+        </style>
     </head>
     <body>
     <?php include 'header.php'; ?>

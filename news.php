@@ -6,20 +6,17 @@
         <meta charset="utf-8">
         <title>ReSoC - Actualités</title>
         <meta name="author" content="Julien Falconnet">
-        <link rel="stylesheet" href="style.css"/>
-        <style>
-  <?php include "style.css" ?>
-</style>
+        <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
     </head>
     <body>
     <?php include 'header.php'; ?>
 
         <div id="wrapper">
             <aside>
-                <img src="user.jpg" alt="Portrait de l'utilisatrice"/>
+                <img src="news.png" alt="Portrait de l'utilisatrice"/>
                 <section>
-                    <h3>Présentation</h3>
-                    <p>Sur cette page vous trouverez les derniers messages de
+                    <h3>Bienvenue sur SocialSong</h3>
+                    <p id="presentation">Sur cette page vous trouverez les derniers messages de
                         tous les utilisatrices du site.</p>
                 </section>
             </aside>
@@ -39,7 +36,8 @@
                             provenance de la base de donnée (voir ci-dessous)</p>
                     </div>
                     <footer>
-                        <small>♥1012 </small>
+                        <img src="love.png"/>
+                        <small>1012 </small>
                         <a href="">#lorem</a>,
                         <a href="">#piscitur</a>,
                     </footer>
@@ -149,7 +147,8 @@
                             echo "👍";
                         }
                           } ?>
-                          <small>♥<?php echo $post['like_number'] ?> </small>
+                          <img src="love.png"/>
+                          <small><?php echo $post['like_number'] ?> </small>
                     <?php
                     if (isset($_SESSION['connected_id'])) { ?>
                             <!-- Formulaire "bouton ♥" Front -->

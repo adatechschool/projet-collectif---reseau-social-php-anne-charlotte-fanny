@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>ReSoC - Connexion</title>
         <meta name="author" content="Julien Falconnet">
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
     </head>
     <body>
     <?php include 'header.php'; ?>
@@ -60,12 +60,12 @@
 
                         } else
                         {   session_start();
-                            echo "Votre connexion est un succès : " . $user['alias'] . ".";
+                            //echo "Votre connexion est un succès : " . $user['alias'] . ".";
                             // Etape 7 : Se souvenir que l'utilisateur s'est connecté pour la suite
                             // documentation: https://www.php.net/manual/fr/session.examples.basic.php
                             $_SESSION['connected_id']=$user['id'];
                             $_SESSION['connected_alias']=$user['alias'];
-                            echo $_SESSION['connected_id'];
+                            //echo $_SESSION['connected_id'];
                             header("Location:news.php");
                         }
                     }

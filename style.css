@@ -4,7 +4,8 @@ body{
 }
 
 a{text-decoration: none; color:black;}
-a:hover{text-decoration: underline;}
+
+a:hover{text-decoration: none;}
 
 body>header{
     background-color: #3E2EA6;
@@ -15,33 +16,36 @@ body>header{
 
 }
 body>header img{
-    height:5em;
+    padding:0.5em;
+    width:30%;
+    transform: rotate(-10deg);
 }
 body>header #menu {
     display:flex;
     width:65%;
-    align-items: stretch;
+    align-items: center;
     border-left: 1px solid #3E2EA6;
     
 }
 body>header #menu a{
     flex:1;
     text-align: center;
-    padding-top:1.5em;
     border-right: 1px solid #3E2EA6;
     color:#D99F59;
-    font-size: 1.3em;
+    font-size: 1.13em;
 }
-body>header a:hover
-{
-    background-color: #99b;
+
+body>header #menu a:hover{
+    color:#f0ca79;
 }
+
 body>header ul{list-style: none;}
 body>header #user
 {
     margin-left: auto;
     flex:0.2;
     border-left: 1px solid #3E2EA6;
+    align-items: center;
 }
 body>header #user>a{
     display:block;
@@ -49,6 +53,10 @@ body>header #user>a{
     padding:2em 0;
     width:100%;
     color:#D99F59;
+    font-size: 1.13em;
+}
+body>header #user>a:hover {
+    color:#f0ca79;
 }
 body>header #user ul{ 
     display: none;
@@ -83,6 +91,14 @@ body>header #user:hover ul{
     padding:1em;
     border-radius: 1em;    
 }
+#wrapper aside h3 {
+    color:#3E2EA6;
+    text-align:center;
+}
+
+#wrapper aside p {
+    text-align:center;
+}
 #wrapper aside img{
     display: block;
     width:50%;
@@ -96,7 +112,7 @@ body>header #user:hover ul{
     overflow-y:  scroll;
 }
 #wrapper main article{
-    background-color: #fff;
+    background-color: white;;
     padding:1em;
     margin-bottom: 1em ;
     border-radius: 1em;
@@ -104,8 +120,9 @@ body>header #user:hover ul{
 #wrapper main article h3{
     margin:0;
     padding:0;
-    font-weight: normal;
+    font-weight: bold;
     font-size:1em;
+    color:#3E2EA6;
 
 }
 #wrapper main article time{
@@ -114,18 +131,32 @@ body>header #user:hover ul{
 #wrapper main article address{
     text-align: right;
     margin-bottom: 1em;
+    font-weight:bold;
 }
 #wrapper main article p{
     margin:0;
 }
 #wrapper main article footer{
     margin-top: 1em;
-    text-align: right;
+    color: #D99F59;
+    text-align:right;
+    padding-bottom:0.5em;
 }
 #wrapper main article footer small{
     float:left;
+    text-align:left;
+    padding-top: 0.4em;
+    font-weight: bold;
+    font-size: 15px;
 }
-
+#wrapper main article footer img {
+    width:4%;
+    float:left;
+    padding-right: 0.5em;
+}
+#wrapper main article footer {
+    text-align:right;
+}
 #wrapper.admin{flex-direction: row-reverse}
 #wrapper.admin aside{flex:1;margin-left:1em;border-radius:0;padding:0;}
 #wrapper.admin main{flex:2;background-color: #fff;border-radius: 0;padding:0;}
