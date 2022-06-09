@@ -27,19 +27,22 @@
                     <h3>
                         <time datetime='2020-02-01 11:12:13' >31 février 2010 à 11h12</time>
                     </h3>
-                    <address>par AreTirer</address>
+                    <address>par Anne</address>
                     <div>
-                        <p>Ceci est un paragraphe</p>
-                        <p>Ceci est un autre paragraphe</p>
-                        <p>... de toutes manières il faut supprimer cet
-                            article et le remplacer par des informations en
-                            provenance de la base de donnée (voir ci-dessous)</p>
+                        <p>Bim bam toi</p>
+                        <p>Carla</p>
+                        <p id="citation">"Et ça fait bim bam boom"</p>
+                        <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+                    <br>
+                    <div id="player">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/pjJ2w1FX_Wg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
                     </div>
                     <footer>
                         <img src="love.png"/>
                         <small>1012 </small>
-                        <a href="">#lorem</a>,
-                        <a href="">#piscitur</a>,
+                        <a href="">#culture</a>,
                     </footer>
                 </article>
 
@@ -114,7 +117,7 @@
                         <h3>
                             <time><?php echo $post['created'] ?></time>
                         </h3>
-                        <address><a href="wall.php?user_id=<?php echo $post['author_id'] ?>"><?php echo $post['author_name'] ?></a></address>
+                        <address>par <a href="wall.php?user_id=<?php echo $post['author_id'] ?>"><?php echo $post['author_name'] ?></a></address>
                         <div>
                             <p><?php echo $post['content'] ?></p>
                         </div>
@@ -175,5 +178,6 @@
 
             </main>
         </div>
+
     </body>
 </html>
