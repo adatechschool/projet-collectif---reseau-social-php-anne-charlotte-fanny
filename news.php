@@ -1,4 +1,5 @@
-<?php session_start();?>
+<?php session_start();
+?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -6,6 +7,9 @@
         <title>ReSoC - Actualités</title>
         <meta name="author" content="Julien Falconnet">
         <link rel="stylesheet" href="style.css"/>
+        <style>
+  <?php include "style.css" ?>
+</style>
     </head>
     <body>
     <?php include 'header.php'; ?>

@@ -3,12 +3,14 @@
                 if (!isset($_SESSION['connected_id'])) {
 
                 echo "<header>
-                <img src='resoc.jpg' alt='Logo de notre réseau social'/>
+
+                
                 <nav id='menu'>
+                <a href='news.php'>Logo</a>
                     <a href='news.php'>Actualités</a>
                     <a href='feed.php'>Flux</a>
                     <a href='registration.php'>Inscription</a>
-                    <a href='usurpedpost.php'>Message en mode non-identifié</a>
+                    <a href='usurpedpost.php'>Message anonyme</a>
                 </nav>
                 <nav id='user'>
                  <a href='login.php'>Login</a>

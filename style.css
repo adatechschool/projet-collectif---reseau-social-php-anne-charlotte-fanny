@@ -1,5 +1,5 @@
 body{
-    background-color: #003;
+    background-color: #CFC5D9;
     font-family: Arial;
 }
 
@@ -7,9 +7,9 @@ a{text-decoration: none; color:black;}
 a:hover{text-decoration: underline;}
 
 body>header{
-    background-color: #fff;
+    background-color: #3E2EA6;
     display:flex;
-    width:80em;
+    width:100%;
     margin:0 auto 2em auto;    
     padding:0;
 
@@ -19,15 +19,18 @@ body>header img{
 }
 body>header #menu {
     display:flex;
-    width:50%;
+    width:65%;
     align-items: stretch;
-    border-left: 1px solid #99b;
+    border-left: 1px solid #3E2EA6;
+    
 }
 body>header #menu a{
     flex:1;
     text-align: center;
-    padding-top:2em;
-    border-right: 1px solid #99b;
+    padding-top:1.5em;
+    border-right: 1px solid #3E2EA6;
+    color:#D99F59;
+    font-size: 1.3em;
 }
 body>header a:hover
 {
@@ -38,13 +41,14 @@ body>header #user
 {
     margin-left: auto;
     flex:0.2;
-    border-left: 1px solid #99b;
+    border-left: 1px solid #3E2EA6;
 }
 body>header #user>a{
     display:block;
     text-align: center;
     padding:2em 0;
     width:100%;
+    color:#D99F59;
 }
 body>header #user ul{ 
     display: none;
@@ -53,7 +57,7 @@ body>header #user ul{
     margin:0;
     margin-left:-5em;
     background-color: #fff;
-    border: 1px solid #99b;
+    border: 1px solid #3E2EA6;
 
     z-index: 1;
 }
@@ -61,7 +65,7 @@ body>header #user ul li a{
     display:block;
     width:10em;
     padding:1em;
-    border-bottom: 1px solid #99b;
+    border-bottom: 1px solid #3E2EA6;
 }
 body>header #user:hover ul{
     display:block;
@@ -154,3 +158,4 @@ body>header #user:hover ul{
 pre{
     color:#aaa;
 }
+
