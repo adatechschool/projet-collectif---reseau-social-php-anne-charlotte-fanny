@@ -159,10 +159,11 @@
                         }
                           } ?>
                           
-                          <small id="numberlikes"><?php echo $post['like_number'] ?> </small>
+                          
                     <?php
                     if (isset($_SESSION['connected_id'])) { ?>
                             <!-- Formulaire "bouton ♥" Front -->
+                            <small id="numberlikes"><?php echo $post['like_number'] ?> </small>
                             <small>
                               <form action="news.php" method="post">
                                 <input type="hidden" name="liker_id" value="<?php echo $_SESSION['connected_id']?>">
@@ -172,8 +173,14 @@
 
                               </form>
                             </small>
-                        <?php } ?>
-
+                        <?php } 
+                        else {?>
+                        <small id="numberlikes"><?php echo $post['like_number'] ?> </small>
+                        <small>
+                        <button style="border: none; background-color: white; text-decoration: none; display: inline-block; padding: 5px;" type="submit">
+                                <img src="love.png" alt="" style="float: left; padding-right: 0.5em; width:5%;" /></button></small>
+                        <?php } 
+                        ?>
                             <?php
                             $array = explode(',', $post['taglist']);
                             foreach ($array as $valeur) {
